@@ -1,6 +1,6 @@
 import pygame
 from game.components.enemies.ship import ship
-from game.components.enemies.enemy2 import Enemy2
+from game.components.enemies.spider_ship import Enemy2
 
 class EnemyHandler:
     def __init__(self):
