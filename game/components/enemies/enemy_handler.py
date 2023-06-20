@@ -1,3 +1,4 @@
+import pygame
 from game.components.enemies.ship import ship
 from game.components.enemies.enemy2 import Enemy2
 
@@ -18,8 +19,26 @@ class EnemyHandler:
 
     def add_enemy(self):
         if len(self.enemies) < 4:
-            self.enemies.append(ship())
-            self.enemies.append(Enemy2())
+            new_enemy = ship()
+            overlapping = False
+            for enemy in self.enemies:
+                if pygame.sprite.collide_rect(new_enemy, enemy):
+                    overlapping = True
+                    break
+            
+            if not overlapping:
+                self.enemies.append(new_enemy)
+
+            new_enemy2 = Enemy2()
+            overlapping = False
+
+            for enemy in self.enemies:
+                if pygame.sprite.collide_rect(new_enemy2, enemy):
+                    overlapping = True
+                    break
+            
+            if not overlapping:
+                self.enemies.append(new_enemy2)
 
     def remove_enemy(self, enemy):
         self.enemies.remove(enemy)
