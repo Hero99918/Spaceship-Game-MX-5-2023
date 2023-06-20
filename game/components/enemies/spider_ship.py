@@ -9,10 +9,11 @@ class Enemy2(Enemy):
     HEIGHT = 60
     X_POS_LIST = [100, 200, 300, 400, 500, 600, 700, 800, 900]
     Y_POS = -3
-    SPEED_X = 6
+    SPEED_X = 10
     SPEED_Y = 3
     MOV_X = [LEFT, RIGHT]
     INTERVAL = 70
+    SHOOTING_TIME = 15
 
     def __init__(self):
         self.image = ENEMY_2
@@ -24,8 +25,10 @@ class Enemy2(Enemy):
         self.speed_y = self.SPEED_Y
         self.move_x = random.choice(self.MOV_X)
         self.index = 0
+        self.shooting_time = random.randint(0, self.SHOOTING_TIME)
 
-    def update(self):
+    def update(self, bullet_handler):
+        super().update(bullet_handler)
         self.index += 1
         if self.index >= self.INTERVAL:
             self.index = 0

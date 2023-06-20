@@ -6,12 +6,24 @@ class EnemyHandler:
     def __init__(self):
         self.enemies = []
 
-    def update(self):
-        self.add_enemy() and self.add_enemy2
+    def update(self, bullet_handler):
+        self.add_enemy()
+        self.add_enemy2()
         for enemy in self.enemies:
-            enemy.update()
+            enemy.update(bullet_handler)
             if not enemy.is_alive:
                 self.remove_enemy(enemy)
+
+    def add_enemy2(self):
+        if len(self.enemies) < 2:
+            new_enemy2 = Enemy2()
+            overlapping = False
+            for enemy in self.enemies:
+                if pygame.sprite.collide_rect(new_enemy2, enemy):
+                    overlapping = True
+                    break
+            if not overlapping:
+                self.enemies.append(new_enemy2)
 
     def draw(self, screen):
         for enemy in self.enemies:

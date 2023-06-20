@@ -12,7 +12,8 @@ class Spaceship:
         self.image = pygame.transform.scale(self.image, (self.WIDTH, self.HEIGTH))
         self.rect = self.image.get_rect()
         self.rect.x = self.X_POS
-        self.rect.y = self.Y_POS 
+        self.rect.y = self.Y_POS
+        self.is_alive = True 
 
     def update(self, user_input):
         if user_input[pygame.K_a]:
