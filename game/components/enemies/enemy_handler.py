@@ -5,13 +5,16 @@ from game.components.enemies.spider_ship import Enemy2
 class EnemyHandler:
     def __init__(self):
         self.enemies = []
+        self.number_enemies_destroyed = 0
 
     def update(self, bullet_handler):
         self.add_enemy()
         self.add_enemy2()
         for enemy in self.enemies:
             enemy.update(bullet_handler)
-            if not enemy.is_alive:
+            if enemy.is_destroyed:
+                self.number_enemies_destroyed += 1
+            if not enemy.is_alive: #is_alive significa que esta visible
                 self.remove_enemy(enemy)
 
     def add_enemy2(self):
@@ -57,3 +60,7 @@ class EnemyHandler:
 
     def check_collision(rect1, rect2):
         return rect1.colliderect(rect2)
+    
+    def reset(self):
+        self.enemies =  []
+        self.number_enemies_destroyed = 0

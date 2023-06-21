@@ -28,4 +28,7 @@ class BulletHandler:
 
     def remove_bullet(self, bullet):
         self.bullets.remove(bullet)
+
+    def reset(self):
+        self.bullets = []
             
