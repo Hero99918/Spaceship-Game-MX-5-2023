@@ -24,6 +24,8 @@ class Game:
         self.bullet_handler = BulletHandler()
         self.number_death = 0
         self.score = 0
+        self.max_score = 0
+        self.num_attempts = 0
 
     def run(self):
         # Game loop: events - update - draw
@@ -55,6 +57,8 @@ class Game:
                 pygame.time.delay(300)
                 self.playing = False
                 self.number_death += 1
+                self.max_score = max(self.max_score, self.score)
+                self.num_attempts += 1
 
     def draw(self):
         self.draw_background()
@@ -86,8 +90,12 @@ class Game:
         else:
             text, text_rect = text_utils.get_message('Press any Key to ReStart', 30, WHITE_COLOR)
             score, score_rect = text_utils.get_message(f'Your score is: {self.score}', 30, WHITE_COLOR, height=SCREEN_HEIGHT//2 + 50)
+            max_score, max_score_rect = text_utils.get_message(f'Max Score: {self.max_score}', 30, WHITE_COLOR, height=SCREEN_HEIGHT//2 + 100)
+            num_attempts, num_attempts_rect = text_utils.get_message(f'Attempts: {self.num_attempts}', 30, WHITE_COLOR, height=SCREEN_HEIGHT//2 + 150)
             self.screen.blit(text, text_rect)
             self.screen.blit(score, score_rect)
+            self.screen.blit(max_score, max_score_rect)
+            self.screen.blit(num_attempts, num_attempts_rect)
 
     def draw_score(self):
         score, score_rect = text_utils.get_message(f'Your score is: {self.score}', 20, WHITE_COLOR, 1000, 40)
