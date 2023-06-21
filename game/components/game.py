@@ -63,7 +63,7 @@ class Game:
             self.player.draw(self.screen)
             self.enemy_handler.draw(self.screen)
             self.bullet_handler.draw(self.screen)
-            self.draw_score
+            self.draw_score()
         else:
             self.draw_menu()
         pygame.display.update()
