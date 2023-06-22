@@ -58,6 +58,7 @@ class EnemyHandler:
     def remove_enemy(self, enemy):
         self.enemies.remove(enemy)
 
+    @staticmethod
     def check_collision(rect1, rect2):
         return rect1.colliderect(rect2)
     
