@@ -1,6 +1,6 @@
 import pygame
 
-from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, WHITE_COLOR
+from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, WHITE_COLOR, PURPLE_COLOR
 from game.components.spaceship import Spaceship
 from game.components.enemies.enemy_handler import EnemyHandler
 from game.components.bullets.bullet_handler import BulletHandler
@@ -68,6 +68,7 @@ class Game:
             self.enemy_handler.draw(self.screen)
             self.bullet_handler.draw(self.screen)
             self.draw_score()
+            self.draw_tip()
         else:
             self.draw_menu()
         pygame.display.update()
@@ -90,8 +91,8 @@ class Game:
         else:
             text, text_rect = text_utils.get_message('Press any Key to ReStart', 30, WHITE_COLOR)
             score, score_rect = text_utils.get_message(f'Your score is: {self.score}', 30, WHITE_COLOR, height=SCREEN_HEIGHT//2 + 50)
-            max_score, max_score_rect = text_utils.get_message(f'Max Score: {self.max_score}', 30, WHITE_COLOR, height=SCREEN_HEIGHT//2 + 100)
-            num_attempts, num_attempts_rect = text_utils.get_message(f'Attempts: {self.num_attempts}', 30, WHITE_COLOR, height=SCREEN_HEIGHT//2 + 150)
+            max_score, max_score_rect = text_utils.get_message(f'Max Score: {self.max_score}', 30, PURPLE_COLOR, height=SCREEN_HEIGHT//2 + 100)
+            num_attempts, num_attempts_rect = text_utils.get_message(f'Attempts: {self.num_attempts}', 30, PURPLE_COLOR, height=SCREEN_HEIGHT//2 + 150)
             self.screen.blit(text, text_rect)
             self.screen.blit(score, score_rect)
             self.screen.blit(max_score, max_score_rect)
@@ -100,6 +101,10 @@ class Game:
     def draw_score(self):
         score, score_rect = text_utils.get_message(f'Your score is: {self.score}', 20, WHITE_COLOR, 1000, 40)
         self.screen.blit(score, score_rect)
+
+    def draw_tip(self):
+        tip, tip_rect = text_utils.get_message(f'Kill as many as you can', 15, PURPLE_COLOR, 90, 40)
+        self.screen.blit(tip, tip_rect)
 
     def reset(self):
         self.player.reset()

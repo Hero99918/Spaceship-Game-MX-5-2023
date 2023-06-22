@@ -41,3 +41,4 @@ RIGHT = 'right'
 
 BLACK_COLOR = (0, 0, 0)
 WHITE_COLOR = (255, 255, 255)
+PURPLE_COLOR = (128, 0, 128)
