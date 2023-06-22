@@ -13,7 +13,10 @@ class EnemyHandler:
         for enemy in self.enemies:
             enemy.update(bullet_handler)
             if enemy.is_destroyed:
-                self.number_enemies_destroyed += 1
+                if isinstance(enemy, Enemy2):
+                    self.number_enemies_destroyed += 3
+                else:
+                    self.number_enemies_destroyed += 1
             if not enemy.is_alive: #is_alive significa que esta visible
                 self.remove_enemy(enemy)
 
