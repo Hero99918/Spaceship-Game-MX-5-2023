@@ -18,7 +18,7 @@ class Spaceship:
         self.has_shield = False
         self.time_up = 0
 
-    def update(self, user_input, bullet_handler, meteorite_handler):
+    def update(self, user_input, bullet_handler, meteorite_handler, missile_handler):
         if user_input[pygame.K_a]:
             self.move_left()
         elif user_input[pygame.K_d]:
@@ -36,6 +36,9 @@ class Spaceship:
                 self.desactive_power_up()
 
         if meteorite_handler.check_collision(self.rect):
+            self.is_alive = False
+
+        if missile_handler.check_collision(self.rect):
             self.is_alive = False
 
     def draw(self, screen):

@@ -6,6 +6,7 @@ from game.components.enemies.enemy_handler import EnemyHandler
 from game.components.bullets.bullet_handler import BulletHandler
 from game.components.power_ups.power_up_handler import PowerUpHandler
 from game.components.enemies.meteorite_handler import MeteoriteHandler
+from game.components.enemies.misiles.misil_handler import MissileHandler
 from game.utils import text_utils
 
 
@@ -26,6 +27,7 @@ class Game:
         self.bullet_handler = BulletHandler()
         self.power_up_handler = PowerUpHandler()
         self.meteorite_handler = MeteoriteHandler()
+        self.missile_handler = MissileHandler()
         self.number_death = 0
         self.score = 0
         self.max_score = 0
@@ -54,13 +56,16 @@ class Game:
         if self.playing:
             user_input = pygame.key.get_pressed()
             if self.player.is_alive:
-                self.player.update(user_input, self.bullet_handler, self.meteorite_handler)
+                self.player.update(user_input, self.bullet_handler, self.meteorite_handler, self.missile_handler)
                 if self.meteorite_handler.check_collision(self.player):
+                    self.player.is_alive = False
+                elif self.missile_handler.check_collision(self.player):
                     self.player.is_alive = False
             self.enemy_handler.update(self.bullet_handler)
             self.bullet_handler.update(self.player, self.enemy_handler.enemies)
             self.power_up_handler.update(self.player)
             self.meteorite_handler.update(self.player)
+            self.missile_handler.update(self.player)
             self.score = self.enemy_handler.number_enemies_destroyed
             if not self.player.is_alive:
                 pygame.time.delay(300)
@@ -78,6 +83,7 @@ class Game:
             self.bullet_handler.draw(self.screen)
             self.power_up_handler.draw(self.screen)
             self.meteorite_handler.draw(self.screen)
+            self.missile_handler.draw(self.screen)
             self.draw_score()
             self.draw_tip()
         else:
@@ -123,6 +129,7 @@ class Game:
         self.bullet_handler.reset()
         self.power_up_handler.reset()
         self.meteorite_handler.reset()
+        self.missile_handler.reset()
 
 
 
