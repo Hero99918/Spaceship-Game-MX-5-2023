@@ -19,6 +19,8 @@ HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
 TENKIU = pygame.image.load(os.path.join(IMG_DIR, 'Other/laser.png'))
 
+LOGO = pygame.image.load(os.path.join(IMG_DIR, 'Other/Logo.png'))
+
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = 'shield'
 
@@ -46,3 +48,4 @@ RIGHT = 'right'
 BLACK_COLOR = (0, 0, 0)
 WHITE_COLOR = (255, 255, 255)
 PURPLE_COLOR = (128, 0, 128)
+GREEN_COLOR = (0, 255, 0)

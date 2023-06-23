@@ -1,6 +1,6 @@
 import pygame
 
-from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, WHITE_COLOR, PURPLE_COLOR
+from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, WHITE_COLOR, PURPLE_COLOR, LOGO, GREEN_COLOR
 from game.components.spaceship import Spaceship
 from game.components.enemies.enemy_handler import EnemyHandler
 from game.components.bullets.bullet_handler import BulletHandler
@@ -32,6 +32,8 @@ class Game:
         self.score = 0
         self.max_score = 0
         self.num_attempts = 0
+        self.menu_selection = 0
+        self.game_over = 0
 
     def run(self):
         # Game loop: events - update - draw
@@ -49,8 +51,27 @@ class Game:
                 self.running = False
                 self.playing = False
             elif event.type == pygame.KEYDOWN and not self.playing:
-                self.playing = True
-                self.reset()
+                if self.playing:
+                    if event.key == pygame.K_ESCAPE:
+                        self.playing = False
+                else:
+                    if event.key == pygame.K_UP:
+                        self.menu_selection -= 1
+                        if self.menu_selection < 0:
+                            self.menu_selection = 2
+                    elif event.key == pygame.K_DOWN:
+                        self.menu_selection += 1
+                        if self.menu_selection > 2:
+                            self.menu_selection = 0
+                    elif event.key == pygame.K_RETURN:
+                        if self.menu_selection == 0:
+                            self.playing = True
+                            self.reset()
+                        elif self.menu_selection == 1:
+                            self.show_max_score()
+                            pygame.time.delay(2000)
+                        elif self.menu_selection == 2:
+                            self.running = False
 
     def update(self):
         if self.playing:
@@ -71,6 +92,7 @@ class Game:
                 pygame.time.delay(300)
                 self.playing = False
                 self.number_death += 1
+                self.game_over = True
                 self.max_score = max(self.max_score, self.score)
                 self.num_attempts += 1
 
@@ -101,19 +123,32 @@ class Game:
             self.y_pos_bg = 0
         self.y_pos_bg += self.game_speed
 
+
+    WIDTH = 340
+    HEIGHT = 300
+
     def draw_menu(self):
-        if self.number_death == 0:
-            text, text_rect = text_utils.get_message('Press any Key to Start', 30, WHITE_COLOR)
+        options_menu = ['START', 'Max Score', 'Exit']
+        color_menu = [WHITE_COLOR] * 3
+        color_menu[self.menu_selection] = PURPLE_COLOR
+        menu_image = LOGO
+        menu_image = pygame.transform.scale(menu_image, (self.WIDTH, self.HEIGHT))
+        menu_rect = menu_image.get_rect()
+        menu_rect.center = (560, 160)
+        self.screen.blit(menu_image, menu_rect)
+
+        for index, option in enumerate(options_menu):
+            text, text_rect = text_utils.get_message(option, 30, color_menu[index], height=SCREEN_HEIGHT//1.3 - 100 + index * 40)
             self.screen.blit(text, text_rect)
-        else:
-            text, text_rect = text_utils.get_message('Press any Key to ReStart', 30, WHITE_COLOR)
-            score, score_rect = text_utils.get_message(f'Your score is: {self.score}', 30, WHITE_COLOR, height=SCREEN_HEIGHT//2 + 50)
-            max_score, max_score_rect = text_utils.get_message(f'Max Score: {self.max_score}', 30, PURPLE_COLOR, height=SCREEN_HEIGHT//2 + 100)
-            num_attempts, num_attempts_rect = text_utils.get_message(f'Attempts: {self.num_attempts}', 30, PURPLE_COLOR, height=SCREEN_HEIGHT//2 + 150)
-            self.screen.blit(text, text_rect)
+        if self.game_over:
+            score, score_rect = text_utils.get_message(f'Your score is: {self.score}', 20, PURPLE_COLOR, SCREEN_WIDTH//2, SCREEN_HEIGHT//2 + 200)
             self.screen.blit(score, score_rect)
-            self.screen.blit(max_score, max_score_rect)
-            self.screen.blit(num_attempts, num_attempts_rect)
+
+    def show_max_score(self):
+        max_score_text = f"Max Score: {self.max_score}"
+        text_surface, text_rect = text_utils.get_message(max_score_text, 30, GREEN_COLOR, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+        self.screen.blit(text_surface, text_rect)
+        pygame.display.update()
 
     def draw_score(self):
         score, score_rect = text_utils.get_message(f'Your score is: {self.score}', 20, WHITE_COLOR, 1000, 40)
