@@ -9,6 +9,9 @@ class MeteoriteHandler():
         self.add_meteorite()
         for meteorite in self.meteorites:
             meteorite.update(player)
+            if meteorite.rect.colliderect(player.rect):
+                player.is_alive = False
+        self.meteorites = [meteorite for meteorite in self.meteorites if meteorite.is_alive]
         if not meteorite.is_alive:
             self.remove_meteorite(meteorite)
 
@@ -22,6 +25,12 @@ class MeteoriteHandler():
 
     def remove_meteorite(self, meteorite):
         self.meteorites.remove(meteorite)
+
+    def check_collision(self, rect):
+        for meteorite in self.meteorites:
+            if meteorite.rect.colliderect(rect):
+                return True
+        return False
 
     def reset(self):
         self.meteorites = []

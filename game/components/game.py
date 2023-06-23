@@ -53,7 +53,10 @@ class Game:
     def update(self):
         if self.playing:
             user_input = pygame.key.get_pressed()
-            self.player.update(user_input, self.bullet_handler)
+            if self.player.is_alive:
+                self.player.update(user_input, self.bullet_handler, self.meteorite_handler)
+                if self.meteorite_handler.check_collision(self.player):
+                    self.player.is_alive = False
             self.enemy_handler.update(self.bullet_handler)
             self.bullet_handler.update(self.player, self.enemy_handler.enemies)
             self.power_up_handler.update(self.player)
