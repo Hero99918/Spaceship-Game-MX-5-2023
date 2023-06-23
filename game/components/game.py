@@ -4,6 +4,7 @@ from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, F
 from game.components.spaceship import Spaceship
 from game.components.enemies.enemy_handler import EnemyHandler
 from game.components.bullets.bullet_handler import BulletHandler
+from game.components.power_ups.power_up_handler import PowerUpHandler
 from game.utils import text_utils
 
 
@@ -22,6 +23,7 @@ class Game:
         self.player = Spaceship()
         self.enemy_handler = EnemyHandler()
         self.bullet_handler = BulletHandler()
+        self.power_up_handler = PowerUpHandler()
         self.number_death = 0
         self.score = 0
         self.max_score = 0
@@ -52,6 +54,7 @@ class Game:
             self.player.update(user_input, self.bullet_handler)
             self.enemy_handler.update(self.bullet_handler)
             self.bullet_handler.update(self.player, self.enemy_handler.enemies)
+            self.power_up_handler.update(self.player)
             self.score = self.enemy_handler.number_enemies_destroyed
             if not self.player.is_alive:
                 pygame.time.delay(300)
@@ -67,6 +70,7 @@ class Game:
             self.player.draw(self.screen)
             self.enemy_handler.draw(self.screen)
             self.bullet_handler.draw(self.screen)
+            self.power_up_handler.draw(self.screen)
             self.draw_score()
             self.draw_tip()
         else:
@@ -110,6 +114,7 @@ class Game:
         self.player.reset()
         self.enemy_handler.reset()
         self.bullet_handler.reset()
+        self.power_up_handler.reset()
 
 
 
