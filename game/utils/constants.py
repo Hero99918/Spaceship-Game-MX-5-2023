@@ -17,12 +17,15 @@ BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
+TENKIU = pygame.image.load(os.path.join(IMG_DIR, 'Other/laser.png'))
+
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = 'shield'
 
 SPACESHIP = pygame.image.load(os.path.join(IMG_DIR, "Spaceship/spaceship.png"))
 SPACESHIP_SHIELD = pygame.image.load(os.path.join(IMG_DIR, "Spaceship/spaceship_shield.png"))
 BULLET = pygame.image.load(os.path.join(IMG_DIR, "Bullet/bullet_1.png"))
+LASER = pygame.image.load(os.path.join(IMG_DIR, "Bullet/laser.png"))
 
 BULLET_ENEMY = pygame.image.load(os.path.join(IMG_DIR, "Bullet/bullet_2.png"))
 ENEMY_1 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_1.png"))
@@ -35,6 +38,7 @@ FONT_STYLE = 'freesansbold.ttf'
 
 BULLET_ENEMY_TYPE = 'enemy'
 BULLET_SPACESHIP_TYPE = 'ship'
+BULLET_BOSS_TYPE = 'ufo_boss'
 
 LEFT = 'left'
 RIGHT = 'right'
