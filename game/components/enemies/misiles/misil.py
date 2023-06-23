@@ -3,11 +3,11 @@ from game.utils.constants import MISSILE, SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class Missile():
-    WIDTH = 50
-    HEIGHT = 30
+    WIDTH = 60
+    HEIGHT = 40
     X_POS = 0
     Y_POS = SCREEN_HEIGHT - HEIGHT - 50
-    SPEED = 10
+    SPEED = 15
 
     def __init__(self):
         self.image = MISSILE

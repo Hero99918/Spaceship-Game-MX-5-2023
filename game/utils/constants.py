@@ -29,7 +29,7 @@ ENEMY_1 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_1.png"))
 ENEMY_2 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_2.png"))
 MISSILE = pygame.image.load(os.path.join(IMG_DIR, "Enemy/missile.png"))
 UFO_BOSS = pygame.image.load(os.path.join(IMG_DIR, "Enemy/ufo_boss.png"))
-METEOR = pygame.image.load(os.path.join(IMG_DIR, "Enemy/meteor.jpg"))
+METEOR = pygame.image.load(os.path.join(IMG_DIR, "Enemy/meteor.png"))
 
 FONT_STYLE = 'freesansbold.ttf'
 

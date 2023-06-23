@@ -3,10 +3,10 @@ from game.utils.constants import METEOR, SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class Meteorite():
-    WIDTH = 30
-    HEIGHT = 50
+    WIDTH = 40
+    HEIGHT = 60
     Y_POS = 0
-    SPEED = 8
+    SPEED = 15
 
     def __init__(self):
         self.image = METEOR
