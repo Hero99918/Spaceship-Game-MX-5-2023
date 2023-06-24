@@ -143,6 +143,8 @@ class Game:
         if self.game_over:
             score, score_rect = text_utils.get_message(f'Your score is: {self.score}', 20, PURPLE_COLOR, SCREEN_WIDTH//2, SCREEN_HEIGHT//2 + 200)
             self.screen.blit(score, score_rect)
+            attempts, attempts_rect = text_utils.get_message(f'Attempts: {self.num_attempts}', 20, PURPLE_COLOR, SCREEN_WIDTH//2, SCREEN_HEIGHT//2 + 170)
+            self.screen.blit(attempts, attempts_rect)
 
     def show_max_score(self):
         max_score_text = f"Max Score: {self.max_score}"
@@ -153,6 +155,10 @@ class Game:
     def draw_score(self):
         score, score_rect = text_utils.get_message(f'Your score is: {self.score}', 20, WHITE_COLOR, 1000, 40)
         self.screen.blit(score, score_rect)
+
+    def draw_attempts(self):
+        attempts, attempts_rect = text_utils.get_message(f'Attempts. {self.num_attempts}', 20, PURPLE_COLOR, SCREEN_WIDTH//2, SCREEN_HEIGHT//2)
+        self.screen.blit(attempts, attempts_rect)
 
     def draw_tip(self):
         tip, tip_rect = text_utils.get_message(f'Kill as many as you can', 15, PURPLE_COLOR, 90, 40)
